@@ -1,9 +1,8 @@
 package com.excellence.springbootcrudapisecurity.models;
 
-import jakarta.persistence.Column;
+import java.io.Serializable;
+
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,22 +16,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "users")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class User implements Serializable {
 
-    @Column(nullable = false, unique = true)
-    private String username;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String username;
+	private String email;
+	private String password;
+	private String role; // user, admin
 
-    @Column(nullable = false, unique = true)
-    private String email;
-
-    @Column(nullable = false)
-    private String password;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private UserRole role;
+	public User(String username, String email, String password, String role) {
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.role = role;
+	}
 
 }
