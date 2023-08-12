@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,7 +30,7 @@ public class Task implements Serializable {
 	private LocalDate dueDate;
 	private String status; // To-Do, In Progress, Completed
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private User assignedUser;
 	
 	@ElementCollection
