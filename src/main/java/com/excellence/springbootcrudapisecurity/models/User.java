@@ -1,17 +1,17 @@
 package com.excellence.springbootcrudapisecurity.models;
 
 import java.io.Serializable;
-
 import org.hibernate.annotations.DynamicUpdate;
 
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +19,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder  //add
 @Table(name = "users")
 @DynamicUpdate
 public class User implements Serializable {
@@ -26,13 +27,15 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotEmpty(message="Name can't be null")
+	@NotNull(message="Name can't be null")
+	//add
+	@Column(name="username",nullable = false)
 	private String username;
-	@NotEmpty(message="email can't be null")
+	@NotNull(message="email can't be null")
 	private String email;
-	@NotEmpty(message="password can't be null")
+	@NotNull(message="password can't be null")
 	private String password;
-	@NotEmpty(message="role can't be null")
+	@NotNull(message="role can't be null")
 	private String role; // user, admin
 	
 	
